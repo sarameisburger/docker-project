@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: docker-project
+spec:
+  selector:
+    matchLabels:
+      app: docker-project
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: docker-project
+    spec:
+      containers:
+      - name: frontend
+        image: docker-project_frontend:latest
+        ports:
+        - containerPort: 9000
+      - name: api
+        image: docker-project_api:latest
+        ports:
+        - containerPort: 9001
